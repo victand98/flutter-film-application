@@ -3,21 +3,32 @@ import 'package:flutter_film_application/src/models/film_model.dart';
 
 class MovieHorizontal extends StatelessWidget {
   final List<Film> films;
+  final Function nextPage;
 
-  MovieHorizontal({@required this.films});
+  final _pageController = PageController(
+    initialPage: 1,
+    viewportFraction: 0.3,
+  );
+
+  MovieHorizontal({@required this.films, @required this.nextPage});
 
   @override
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
 
+    _pageController.addListener(() {
+      if (_pageController.position.pixels >=
+          _pageController.position.maxScrollExtent - 200) {
+        print("load new data");
+        nextPage();
+      }
+    });
+
     return Container(
       height: _screenSize.height * 0.2,
       child: PageView(
         pageSnapping: false,
-        controller: PageController(
-          initialPage: 1,
-          viewportFraction: 0.3,
-        ),
+        controller: _pageController,
         children: _targets(context),
       ),
     );
