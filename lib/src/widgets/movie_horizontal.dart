@@ -35,7 +35,7 @@ class MovieHorizontal extends StatelessWidget {
   }
 
   Widget _createTarget(BuildContext context, Film film) {
-    return Container(
+    final filmCard = Container(
       margin: EdgeInsets.only(right: 15.0),
       child: Column(
         children: [
@@ -57,32 +57,12 @@ class MovieHorizontal extends StatelessWidget {
         ],
       ),
     );
-  }
 
-  List<Widget> _targets(BuildContext context) {
-    return films.map((film) {
-      return Container(
-        margin: EdgeInsets.only(right: 15.0),
-        child: Column(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: FadeInImage(
-                placeholder: AssetImage("assets/img/no-image.jpg"),
-                image: NetworkImage(film.getPosterImg()),
-                fit: BoxFit.cover,
-                height: 140.0,
-              ),
-            ),
-            SizedBox(height: 5.0),
-            Text(
-              film.title,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.caption,
-            ),
-          ],
-        ),
-      );
-    }).toList();
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, "detail", arguments: film);
+      },
+      child: filmCard,
+    );
   }
 }

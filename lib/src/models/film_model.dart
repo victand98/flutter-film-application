@@ -69,4 +69,11 @@ class Film {
 
     return "https://image.tmdb.org/t/p/w500$posterPath";
   }
+
+  getBackdropImg() {
+    if (backdropPath == null)
+      return "https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg";
+
+    return "https://image.tmdb.org/t/p/w500$backdropPath";
+  }
 }
