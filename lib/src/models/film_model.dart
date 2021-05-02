@@ -14,6 +14,7 @@ class Films {
 }
 
 class Film {
+  String uniqueId;
   String posterPath;
   bool adult;
   String overview;
