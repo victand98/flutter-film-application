@@ -12,34 +12,35 @@ class CardSwiper extends StatelessWidget {
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
 
-    return Container(
-      padding: EdgeInsets.only(top: 10.0),
-      child: Swiper(
-        layout: SwiperLayout.STACK,
-        itemWidth: _screenSize.width * 0.7,
-        itemHeight: _screenSize.height * 0.5,
-        itemBuilder: (BuildContext context, int index) {
-          films[index].uniqueId = "${films[index].id}-card";
+    return Expanded(
+      child: Container(
+        child: Swiper(
+          layout: SwiperLayout.STACK,
+          itemWidth: _screenSize.width * 0.7,
+          itemHeight: _screenSize.height * 0.5,
+          itemBuilder: (BuildContext context, int index) {
+            films[index].uniqueId = "${films[index].id}-card";
 
-          return Hero(
-            tag: films[index].uniqueId,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: GestureDetector(
-                onTap: () => Navigator.pushNamed(context, "detail",
-                    arguments: films[index]),
-                child: FadeInImage(
-                  image: NetworkImage(
-                    films[index].getPosterImg(),
+            return Hero(
+              tag: films[index].uniqueId,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20.0),
+                child: GestureDetector(
+                  onTap: () => Navigator.pushNamed(context, "detail",
+                      arguments: films[index]),
+                  child: FadeInImage(
+                    image: NetworkImage(
+                      films[index].getPosterImg(),
+                    ),
+                    placeholder: AssetImage("assets/img/no-image.jpg"),
+                    fit: BoxFit.cover,
                   ),
-                  placeholder: AssetImage("assets/img/no-image.jpg"),
-                  fit: BoxFit.cover,
                 ),
               ),
-            ),
-          );
-        },
-        itemCount: films.length,
+            );
+          },
+          itemCount: films.length,
+        ),
       ),
     );
   }

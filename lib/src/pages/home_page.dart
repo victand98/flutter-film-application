@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_film_application/src/providers/films_provider.dart';
 
 import 'package:flutter_film_application/src/widgets/card_swiper_widget.dart';
 import 'package:flutter_film_application/src/widgets/movie_horizontal.dart';
+import 'package:flutter_film_application/src/providers/films_provider.dart';
+import 'package:flutter_film_application/src/search/search_delegate.dart';
 
 class HomePage extends StatelessWidget {
   final filmsProvider = FilmsProvider();
@@ -19,7 +20,10 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Icons.search),
-            onPressed: () {},
+            onPressed: () => showSearch(
+              context: context,
+              delegate: DataSearch(),
+            ),
           )
         ],
       ),
